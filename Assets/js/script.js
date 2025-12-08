@@ -57,3 +57,38 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+
+// ==========================================
+// SCROLL ANIMATION TRIGGER
+// ==========================================
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // 1. Pilih semua elemen yang ingin dianimasikan
+    // Kita targetkan kartu, judul, dan kolom row
+    const elementsToAnimate = document.querySelectorAll('.app-card, .page-title, .landing-title-home, .feature-hover, .team-card');
+    
+    // Tambahkan class dasar ke elemen tersebut
+    elementsToAnimate.forEach((el) => {
+        el.classList.add('animate-on-scroll');
+    });
+
+    // 2. Buat Observer untuk memantau scroll
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            // Jika elemen terlihat di layar
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                // Optional: Hapus observer setelah muncul (agar animasi cuma sekali)
+                observer.unobserve(entry.target); 
+            }
+        });
+    }, {
+        threshold: 0.1, // Picu animasi saat 10% elemen terlihat
+        rootMargin: "0px 0px -50px 0px" // Offset sedikit dari bawah
+    });
+
+    // 3. Mulai memantau setiap elemen
+    elementsToAnimate.forEach((el) => {
+        observer.observe(el);
+    });
+});

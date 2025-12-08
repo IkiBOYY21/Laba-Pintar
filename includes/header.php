@@ -20,6 +20,9 @@ $is_app_page = $user && in_array($current_page, $app_pages);
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">  
   <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/style.css">
 
   <style>
@@ -85,40 +88,36 @@ $is_app_page = $user && in_array($current_page, $app_pages);
 <?php else: ?>
 
     <nav class="navbar navbar-expand-lg app-navbar py-3">
-        <div class="app-container">
-            <a class="navbar-brand fw-bold text-primary" href="<?= BASE_URL ?>home.php">Laba Pintar</a>
+        <div class="app-container d-flex align-items-center justify-content-between w-100">
             
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+            <a class="navbar-brand fw-bold text-white fs-4" href="<?= BASE_URL ?>home.php">
+                Laba Pintar
+            </a>
+            
+            <button class="navbar-toggler border-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
             </button>
             
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto align-items-center">
+            <div class="collapse navbar-collapse flex-grow-0" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center text-center">
                     <li class="nav-item"><a class="nav-link <?= $current_page == 'home.php' ? 'active' : '' ?>" href="<?= BASE_URL ?>home.php">Home</a></li>
                     <li class="nav-item"><a class="nav-link <?= $current_page == 'service.php' ? 'active' : '' ?>" href="<?= BASE_URL ?>service.php">Service</a></li>
                     <li class="nav-item"><a class="nav-link <?= $current_page == 'about.php' ? 'active' : '' ?>" href="<?= BASE_URL ?>about.php">About Us</a></li>
                     <li class="nav-item"><a class="nav-link <?= $current_page == 'contact.php' ? 'active' : '' ?>" href="<?= BASE_URL ?>contact.php">Contact</a></li>
                     
-                    <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
-                        <div class="d-flex">
-                            <a href="<?= BASE_URL ?>auth/login.php" class="btn btn-outline-primary fw-bold me-2">Login</a>
-                            <a href="<?= BASE_URL ?>auth/register.php" class="btn btn-primary fw-bold">Daftar</a>
+                    <li class="nav-item ms-lg-4 mt-3 mt-lg-0">
+                        <div class="d-flex justify-content-center gap-2">
+                            <a href="<?= BASE_URL ?>auth/login.php" class="btn btn-outline-light fw-bold px-4">Login</a>
+                            <a href="<?= BASE_URL ?>auth/register.php" class="btn btn-light text-primary fw-bold px-4">Daftar</a>
                         </div>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-    <div class="container-fluid app-container mt-4">
-
-<?php endif; ?>
-
-<?php if(is_logged_in() || !$is_app_page): ?>
-    <?php if($m = flash('success')): ?>
-      <div class="alert alert-success shadow-sm mt-3"><i class="bi bi-check-circle-fill me-2"></i><?= esc($m) ?></div>
+    
+    <?php if ($current_page != 'home.php'): ?>
+        <div class="container-fluid app-container mt-4">
     <?php endif; ?>
 
-    <?php if($m = flash('error')): ?>
-      <div class="alert alert-danger shadow-sm mt-3"><i class="bi bi-exclamation-triangle-fill me-2"></i><?= esc($m) ?></div>
-    <?php endif; ?>
 <?php endif; ?>
