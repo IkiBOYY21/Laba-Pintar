@@ -23,27 +23,52 @@ if(isset($_GET['del'])){
 include 'includes/header.php';
 $cats = $conn->query("SELECT * FROM kategori_produk ORDER BY created_at DESC");
 ?>
-<h3>Kategori Produk</h3>
-<form method="post" class="mb-3">
-  <input type="hidden" name="action" value="add">
-  <div class="row">
-    <div class="col-md-4"><input class="form-control" name="nama_kategori" placeholder="Nama kategori" required></div>
-    <div class="col-md-6"><input class="form-control" name="deskripsi" placeholder="Deskripsi (opsional)"></div>
-    <div class="col-md-2"><button class="btn btn-success">Tambah</button></div>
-  </div>
-</form>
 
-<table class="table table-sm">
-<thead><tr><th>ID</th><th>Nama</th><th>Deskripsi</th><th>Aksi</th></tr></thead>
-<tbody>
-<?php while($c = $cats->fetch_assoc()): ?>
-<tr>
-  <td><?= $c['id_kategori'] ?></td>
-  <td><?= esc($c['nama_kategori']) ?></td>
-  <td><?= esc($c['deskripsi']) ?></td>
-  <td><a class="btn btn-sm btn-danger" href="<?= BASE_URL ?>/categories.php?del=<?= $c['id_kategori'] ?>" onclick="return confirm('Hapus?')">Hapus</a></td>
-</tr>
-<?php endwhile; ?>
-</tbody>
-</table>
+<div class="row g-4 justify-content-center">
+    <div class="col-md-4">
+        <h2 class="page-title mb-4">Kategori</h2>
+        <div class="card-3d-glass p-4 sticky-top" style="top: 90px;">
+            <h5 class="fw-bold mb-3 text-primary">Buat Kategori Baru</h5>
+            <form method="post">
+                <input type="hidden" name="action" value="add">
+                
+                <div class="form-floating-3d mb-3">
+                    <label class="form-label small fw-bold">Nama Kategori</label>
+                    <input class="form-control" name="nama_kategori" placeholder="Nama" required>
+                </div>
+                
+                <div class="form-floating-3d mb-4">
+                    <label class="form-label small fw-bold">Deskripsi</label>
+                    <textarea class="form-control" name="deskripsi" placeholder="Deskripsi..." style="height: 80px;"></textarea>
+                </div>
+                
+                <button class="btn btn-gradient-3d w-100 fw-bold">
+                    <i class="bi bi-plus-circle me-2"></i> Tambah
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <div class="card-3d-glass p-4 mt-5 mt-md-0"> <h5 class="fw-bold mb-3 text-muted">Daftar Kategori</h5>
+            <table class="table table-hover align-middle">
+                <thead class="table-light"><tr><th>Nama</th><th>Deskripsi</th><th class="text-end">Aksi</th></tr></thead>
+                <tbody>
+                <?php while($c = $cats->fetch_assoc()): ?>
+                <tr>
+                    <td class="fw-bold"><?= esc($c['nama_kategori']) ?></td>
+                    <td class="text-muted small"><?= esc($c['deskripsi']) ?></td>
+                    <td class="text-end">
+                        <a class="btn btn-sm btn-outline-danger rounded-circle" href="<?= BASE_URL ?>/categories.php?del=<?= $c['id_kategori'] ?>" onclick="return confirm('Hapus kategori ini? (Produk terkait mungkin akan kehilangan kategori)')">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+                <?php endwhile; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
 <?php include 'includes/footer.php'; ?>

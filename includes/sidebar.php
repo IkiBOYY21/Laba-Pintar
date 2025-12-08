@@ -1,8 +1,6 @@
 <?php
-// ikiboyy21/laba-pintar/Laba-Pintar-074ca69357fb28dc6f11b9e6d279be5dd0ec7c2c/includes/sidebar.php
 // Pastikan variabel $current_page dan $master_active sudah tersedia dari header.php
 if (!isset($current_page) || !isset($master_active)) {
-    // Fallback jika dipanggil tanpa header, meski seharusnya tidak terjadi
     $current_page = '';
     $master_active = false;
 }
@@ -13,8 +11,23 @@ if (!isset($current_page) || !isset($master_active)) {
         <h5 class="offcanvas-title fw-bold" id="offcanvasLabel">Laba Pintar</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
     </div>
+
     <div class="offcanvas-body p-0"> 
-        <h5 class="fw-bold mb-4 text-primary px-3 pt-3">Navigasi Aplikasi</h5>
+        
+        <div class="sidebar-logo-wrapper border-bottom mb-3">
+            <a href="<?= BASE_URL ?>/dashboard.php" class="sidebar-brand d-flex align-items-center text-decoration-none">
+                <div class="brand-icon bg-gradient-primary text-white d-flex align-items-center justify-content-center shadow-sm">
+                    <i class="bi bi-graph-up-arrow fs-4"></i> 
+                </div>
+                
+                <div class="brand-text ms-2 d-flex flex-column">
+                    <span class="fw-bold fs-5 text-primary lh-1">Laba Pintar</span>
+                    <span class="text-muted small" style="font-size: 0.75rem;">Sistem Keuangan</span>
+                </div>
+            </a>
+        </div>
+        <h5 class="fw-bold mb-3 text-muted px-3 small text-uppercase ls-1 nav-section-title">Menu Utama</h5>
+        
         <div class="sidebar-nav">
             <ul class="nav flex-column">
                 <li class="nav-item"><a class="nav-link <?= $current_page == 'dashboard.php' ? 'active' : '' ?>" href="<?= BASE_URL ?>/dashboard.php"><i class="bi bi-grid-fill me-2"></i> <span class="nav-label">Dashboard</span></a></li>
@@ -33,8 +46,8 @@ if (!isset($current_page) || !isset($master_active)) {
                 <li class="nav-item"><a class="nav-link <?= $current_page == 'pengeluaran.php' ? 'active' : '' ?>" href="<?= BASE_URL ?>/pengeluaran.php"><i class="bi bi-currency-dollar me-2"></i> <span class="nav-label">Pengeluaran</span></a></li>
                 <li class="nav-item"><a class="nav-link <?= $current_page == 'laporan.php' ? 'active' : '' ?>" href="<?= BASE_URL ?>/laporan.php"><i class="bi bi-bar-chart-fill me-2"></i> <span class="nav-label">Laporan</span></a></li>
                 
-                <hr class="mt-4">
-                <h5 class="fw-bold mb-2 text-muted small px-3">Halaman Publik</h5>
+                <hr class="mt-4 mx-3">
+                <h5 class="fw-bold mb-2 text-muted px-3 small text-uppercase ls-1 nav-section-title">Publik</h5>
                 <li class="nav-item"><a class="nav-link py-1" href="<?= BASE_URL ?>/home.php"><i class="bi bi-house-fill me-2"></i> <span class="nav-label">Home</span></a></li>
                 <li class="nav-item"><a class="nav-link py-1" href="<?= BASE_URL ?>/service.php"><i class="bi bi-box-fill me-2"></i> <span class="nav-label">Services</span></a></li>
                 <li class="nav-item"><a class="nav-link py-1" href="<?= BASE_URL ?>/about.php"><i class="bi bi-info-circle-fill me-2"></i> <span class="nav-label">About Us</span></a></li>

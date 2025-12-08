@@ -21,7 +21,7 @@ require_once 'includes/header.php';
                 </div>
                 <h5 class="fw-bold mb-1">HERDI RIZKY GUNAWAN</h5>
                 <span class="badge bg-primary mb-3">Ketua Tim</span>
-                <p class="text-muted small">Bertanggung jawab atas manajemen proyek, arsitektur backend, dan integrasi sistem utama. Mengelola struktur database, optimasi query, dan memastikan keamanan data pengguna.</p>
+                <p class="text-muted small">Bertanggung jawab atas manajemen proyek, arsitektur backend, dan integrasi sistem utama. Merancang antarmuka pengguna (UI/UX) yang interaktif, responsif, dan estetis.</p>
             </div>
         </div>
 

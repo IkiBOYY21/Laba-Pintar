@@ -762,3 +762,454 @@ body.dark-mode .auth-card .form-control {
     transform: scale(1.2); /* Ikon membesar sedikit */
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
+
+/* 1. KARTU 3D GLASS (Glassmorphism Lite) */
+.card-3d-glass {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05), 
+                0 5px 15px rgba(0, 0, 0, 0.03);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.card-3d-glass:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 150, 136, 0.15); /* Glow Teal Halus */
+}
+
+/* 2. INPUT FIELD YANG MENGAMBANG (FLOATING INPUTS) */
+.form-floating-3d .form-control, 
+.form-floating-3d .form-select {
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    background: #f9fbfd;
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.03); /* Efek kedalaman ke dalam */
+    transition: all 0.3s ease;
+}
+
+.form-floating-3d .form-control:focus,
+.form-floating-3d .form-select:focus {
+    background: #ffffff;
+    border-color: var(--primary-color);
+    transform: translateY(-3px); /* Input naik ke atas saat diketik */
+    box-shadow: 0 8px 15px rgba(0, 150, 136, 0.15); /* Shadow luar */
+}
+
+/* 3. TOMBOL GRADIEN 3D */
+.btn-gradient-3d {
+    background: linear-gradient(135deg, var(--primary-light), var(--primary-dark));
+    color: white;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 0 #00695c, /* Efek tebal di bawah (3D button) */
+                0 10px 20px rgba(0, 150, 136, 0.3);
+    transition: all 0.1s;
+    position: relative;
+    top: 0;
+}
+
+.btn-gradient-3d:hover {
+    color: white;
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #00695c, 
+                0 15px 25px rgba(0, 150, 136, 0.4);
+}
+
+.btn-gradient-3d:active {
+    top: 4px; /* Efek tombol ditekan */
+    box-shadow: 0 0 0 #00695c, inset 0 3px 5px rgba(0,0,0,0.2);
+}
+
+/* 4. TOTAL PRICE DISPLAY (NEON EFFECT) */
+.total-price-display {
+    background: linear-gradient(135deg, #212529, #343a40);
+    color: #00e676; /* Neon Green */
+    text-shadow: 0 0 10px rgba(0, 230, 118, 0.5);
+    border-radius: 15px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #495057;
+}
+
+/* Pattern garis-garis halus di background total */
+.total-price-display::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(255,255,255,0.03) 10px,
+        rgba(255,255,255,0.03) 20px
+    );
+}
+
+/* 5. ITEM CARD (Untuk daftar produk di keranjang) */
+.item-card-row {
+    background: #fff;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-left: 5px solid var(--primary-color);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: all 0.3s;
+}
+.item-card-row:hover {
+    transform: scale(1.01);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+/* Dark Mode Fixes */
+body.dark-mode .card-3d-glass {
+    background: #1e293b;
+    border-color: #334155;
+}
+body.dark-mode .item-card-row {
+    background: #0f172a;
+    border-left-color: var(--primary-light);
+}
+body.dark-mode .form-floating-3d .form-control,
+body.dark-mode .form-floating-3d .form-select {
+    background: #0f172a;
+    border-color: #334155;
+    color: white;
+}
+
+/* ========================================= */
+/* FIX: TABEL DARK MODE (MENGHILANGKAN BACKGROUND PUTIH) */
+/* ========================================= */
+
+body.dark-mode .table {
+    /* Mengubah variabel bootstrap agar background tabel transparan */
+    --bs-table-bg: transparent; 
+    --bs-table-striped-bg: rgba(255, 255, 255, 0.05);
+    --bs-table-hover-bg: rgba(255, 255, 255, 0.05);
+    color: var(--text-color) !important;
+    border-color: var(--border-color);
+}
+
+/* Memastikan setiap sel (td/th) tidak membawa background putih sendiri */
+body.dark-mode .table > :not(caption) > * > * {
+    background-color: transparent !important; 
+    color: var(--text-color) !important;
+    border-bottom-color: var(--border-color) !important;
+}
+
+/* Memperbaiki warna teks muted (seperti tanggal/catatan) di dalam tabel agar lebih terang */
+body.dark-mode .table .text-muted {
+    color: #94a3b8 !important; /* Abu-abu terang agar terbaca di background gelap */
+}
+
+/* Opsional: Mempercantik Header Tabel di Dark Mode */
+body.dark-mode .table thead th {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* FIX: MEMASTIKAN TOMBOL DARK MODE BISA DIKLIK */
+.toggle-dark {
+    position: relative; 
+    z-index: 9999 !important; /* Paksa layer paling atas */
+}
+
+/* FIX: PASTIKAN HEADER TIDAK TERTUTUP KONTEN SCROLL */
+.top-header-app {
+    z-index: 1040 !important; /* Lebih tinggi dari sidebar & konten */
+}
+
+/* ========================================= */
+/* SIDEBAR BRANDING (LOGO) STYLES */
+/* ========================================= */
+
+.sidebar-logo-wrapper {
+    padding: 20px;
+    transition: all 0.3s ease;
+    background: transparent;
+}
+
+/* Kotak Ikon Logo */
+.brand-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--primary-light), var(--primary-dark));
+    flex-shrink: 0; /* Mencegah ikon mengecil */
+    transition: all 0.3s ease;
+}
+
+/* Teks Logo */
+.brand-text {
+    white-space: nowrap; /* Mencegah teks turun ke bawah */
+    overflow: hidden;
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+
+/* LOGIKA SAAT SIDEBAR DITUTUP (COLLAPSED) */
+body.sidebar-closed .sidebar-logo-wrapper {
+    padding: 20px 10px; /* Kurangi padding samping agar pas di sidebar kecil */
+}
+
+body.sidebar-closed .sidebar-brand {
+    justify-content: center; /* Tengahkan ikon */
+}
+
+body.sidebar-closed .brand-text {
+    display: none; /* Hilangkan teks */
+    opacity: 0;
+    width: 0;
+}
+
+body.sidebar-closed .nav-section-title {
+    display: none; /* Hilangkan judul seksi menu (Menu Utama, Publik) */
+}
+
+/* LOGIKA DARK MODE UNTUK LOGO */
+body.dark-mode .brand-text span.text-primary {
+    color: var(--primary-light) !important;
+}
+body.dark-mode .brand-text span.text-muted {
+    color: #94a3b8 !important;
+}
+
+/* ========================================= */
+/* SMOOTH SIDEBAR ANIMATION (CUBIC BEZIER)   */
+/* ========================================= */
+
+:root {
+    /* Kecepatan sedikit diperlambat (0.4s) agar mata sempat menangkap gerakan halusnya */
+    /* Kurva 'Standard Ease' (cepat di awal, melambat lembut di akhir) */
+    --smooth-transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* 1. Terapkan Transisi Halus ke Elemen Utama */
+.app-sidebar,
+#app-content-wrapper,
+.top-header-app {
+    transition: var(--smooth-transition) !important;
+}
+
+/* 2. Khusus Desktop: Margin & Width */
+@media (min-width: 992px) {
+    #app-content-wrapper {
+        transition: margin-left 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    }
+    
+    .app-sidebar.offcanvas {
+        transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    }
+    
+    .top-header-app {
+        transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                    left 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    }
+}
+
+/* 3. Animasi Logo & Teks (Supaya tidak kaget saat hilang) */
+.sidebar-logo-wrapper {
+    transition: padding 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.brand-icon {
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.brand-text {
+    /* Teks menghilang lebih cepat dari sidebar menutup agar tidak bocor */
+    transition: opacity 0.2s ease-out, width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    opacity: 1;
+    width: auto;
+    overflow: hidden;
+}
+
+/* Saat Sidebar Tertutup */
+body.sidebar-closed .brand-text {
+    opacity: 0;
+    width: 0;
+    pointer-events: none; /* Mencegah klik hantu */
+    transition: opacity 0.1s ease-in; /* Hilang instan */
+}
+
+/* Efek Membal Sedikit pada Ikon saat Ditutup */
+body.sidebar-closed .brand-icon {
+    transform: scale(0.9); /* Ikon sedikit mengecil saat mode mini */
+}
+
+/* 4. Perbaikan Link Navigasi */
+.sidebar-nav .nav-link {
+    transition: background-color 0.2s, color 0.2s, justify-content 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* ========================================= */
+/* NAVBAR HEADER ANIMATIONS & EFFECTS        */
+/* ========================================= */
+
+/* 1. ANIMASI BACKGROUND HEADER (Living Gradient) */
+/* Membuat warna header bergerak perlahan agar terlihat "hidup" */
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.top-header-app {
+    /* Kita ganti background flat dengan gradient halus */
+    background: linear-gradient(270deg, var(--primary-dark), var(--primary-color), var(--primary-light));
+    background-size: 200% 200%;
+    animation: gradientFlow 10s ease infinite; /* Bergerak terus menerus */
+    
+    /* Bayangan 3D di bawah header */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* KHUSUS DARK MODE: Gradient lebih gelap */
+body.dark-mode .top-header-app {
+    background: linear-gradient(270deg, #0f172a, #1e293b, #0f172a);
+    background-size: 200% 200%;
+    animation: gradientFlow 15s ease infinite;
+}
+
+/* 2. ANIMASI MASUK (ENTRANCE ANIMATION) SAAT PINDAH PAGE */
+
+/* Keyframe: Muncul dari Kiri */
+@keyframes slideInLeftSoft {
+    0% {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Keyframe: Muncul dari Kanan */
+@keyframes slideInRightSoft {
+    0% {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Terapkan ke Bagian Kiri Header (Tombol Toggle & Judul) */
+.top-header-app > div:first-child {
+    animation: slideInLeftSoft 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* Terapkan ke Bagian Kanan Header (User Info, Toggle Dark, Logout) */
+.top-header-app > div:last-child {
+    animation: slideInRightSoft 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    /* Delay sedikit agar tidak muncul barengan (efek domino) */
+    animation-delay: 0.1s; 
+    opacity: 0; /* Mulai dari invisible karena ada delay */
+    animation-fill-mode: forwards; /* Tetap di posisi akhir */
+}
+
+
+/* 3. INTERACTIVE HOVER EFFECTS */
+
+/* Efek Tombol Logout: Melebar sedikit saat di-hover */
+.top-header-app .btn-danger {
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); /* Efek membal (bouncy) */
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.top-header-app .btn-danger::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 0%; height: 100%;
+    background: rgba(255,255,255,0.2);
+    transition: width 0.3s ease;
+    z-index: -1;
+}
+
+.top-header-app .btn-danger:hover {
+    transform: scale(1.05);
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.top-header-app .btn-danger:hover::before {
+    width: 100%; /* Efek kilatan putih saat hover */
+}
+
+/* Efek Nama User: Glow saat hover */
+.user-info {
+    transition: all 0.3s ease;
+    cursor: default;
+    padding: 5px 10px;
+    border-radius: 8px;
+}
+
+.user-info:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white !important;
+    text-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+/* Efek Ikon Toggle Sidebar (Garis Tiga) */
+#sidebarToggleDesktop i, 
+.btn[data-bs-target="#sidebarOffcanvas"] i {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+#sidebarToggleDesktop:hover i,
+.btn[data-bs-target="#sidebarOffcanvas"]:hover i {
+    transform: rotate(180deg); /* Berputar saat di-hover */
+}
+
+/* ========================================= */
+/* UPDATE: SLOW MOTION SCROLL ANIMATION      */
+/* ========================================= */
+
+/* 1. RESET: Matikan animasi otomatis yang sebelumnya kita buat */
+#main-content-area, 
+.landing-wrapper, 
+.auth-card,
+.row > div {
+    animation: none !important; 
+}
+
+/* 2. DEFINISI ANIMASI BARU (Dipicu Class) */
+/* Class ini akan ditambahkan oleh JavaScript ke elemen target */
+.animate-on-scroll {
+    opacity: 0;
+    /* Posisi awal: Turun 60px ke bawah */
+    transform: translateY(60px); 
+    
+    /* DURASI: 1.5 detik (Lebih Pelan/Cinematic) */
+    /* Easing: Cubic Bezier untuk gerakan yang elegan (Cepat di awal, melambat lembut di akhir) */
+    transition: opacity 1.5s cubic-bezier(0.215, 0.610, 0.355, 1.000), 
+                transform 1.5s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    
+    will-change: opacity, transform; /* Optimasi performa render */
+}
+
+/* 3. STATE AKHIR (Saat Elemen Terlihat) */
+/* Class ini ditambahkan oleh JS saat elemen masuk viewport */
+.animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0); /* Kembali ke posisi normal */
+}
+
+/* 4. STAGGER DELAY (Opsional: Efek Antrian) */
+/* Jika ingin elemen muncul bergantian (seperti kartu dashboard), gunakan delay */
+.animate-on-scroll:nth-child(1) { transition-delay: 0.1s; }
+.animate-on-scroll:nth-child(2) { transition-delay: 0.2s; }
+.animate-on-scroll:nth-child(3) { transition-delay: 0.3s; }
+.animate-on-scroll:nth-child(4) { transition-delay: 0.4s; }
