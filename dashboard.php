@@ -19,38 +19,38 @@ include 'includes/header.php';
   <h4 class="mb-4">Ringkasan Keuangan</h4>
   <div class="row g-4">
     <div class="col-lg-3 col-md-6">
-      <div class="app-card stat-card interactive-card">
-        <div class="icon-box" style="background: #22c55e;"><i class="bi bi-box-seam"></i></div>
+      <div class="app-card stat-card interactive-card p-3 d-flex align-items-center">
+        <i class="bi bi-box-seam fs-2 text-success me-3"></i>
         <div class="value-box">
-          <div class="title">Total Produk</div>
-          <div class="value"><?= $tot_produk ?></div>
+          <div class="title text-muted small">Total Produk</div>
+          <div class="value fw-bold fs-4"><?= $tot_produk ?></div>
         </div>
       </div>
     </div>
     <div class="col-lg-3 col-md-6">
-      <div class="app-card stat-card interactive-card">
-        <div class="icon-box" style="background: #3b82f6;"><i class="bi bi-cart3"></i></div>
+      <div class="app-card stat-card interactive-card p-3 d-flex align-items-center">
+        <i class="bi bi-cart3 fs-2 text-primary me-3"></i>
         <div class="value-box">
-          <div class="title">Total Transaksi</div>
-          <div class="value"><?= $tot_transaksi ?></div>
+          <div class="title text-muted small">Total Transaksi</div>
+          <div class="value fw-bold fs-4"><?= $tot_transaksi ?></div>
         </div>
       </div>
     </div>
     <div class="col-lg-3 col-md-6">
-      <div class="app-card stat-card interactive-card">
-        <div class="icon-box" style="background: #f97316;"><i class="bi bi-graph-up-arrow"></i></div>
+      <div class="app-card stat-card interactive-card p-3 d-flex align-items-center">
+        <i class="bi bi-graph-up-arrow fs-2 text-warning me-3"></i>
         <div class="value-box">
-          <div class="title">Pendapatan Bersih</div>
-          <div class="value">Rp <?= number_format($pendapatan,0,',','.') ?></div>
+          <div class="title text-muted small">Pendapatan Bersih</div>
+          <div class="value fw-bold fs-4">Rp <?= number_format($pendapatan,0,',','.') ?></div>
         </div>
       </div>
     </div>
     <div class="col-lg-3 col-md-6">
-      <div class="app-card stat-card interactive-card">
-        <div class="icon-box" style="background: #ef4444;"><i class="bi bi-graph-down-arrow"></i></div>
+      <div class="app-card stat-card interactive-card p-3 d-flex align-items-center">
+        <i class="bi bi-graph-down-arrow fs-2 text-danger me-3"></i>
         <div class="value-box">
-          <div class="title">Total Pengeluaran</div>
-          <div class="value">Rp <?= number_format($pengeluaran,0,',','.') ?></div>
+          <div class="title text-muted small">Total Pengeluaran</div>
+          <div class="value fw-bold fs-4">Rp <?= number_format($pengeluaran,0,',','.') ?></div>
         </div>
       </div>
     </div>

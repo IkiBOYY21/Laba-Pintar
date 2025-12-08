@@ -34,7 +34,11 @@ if (!isset($current_page) || !isset($master_active)) {
                 <li class="nav-item"><a class="nav-link <?= $current_page == 'laporan.php' ? 'active' : '' ?>" href="<?= BASE_URL ?>/laporan.php"><i class="bi bi-bar-chart-fill me-2"></i> Laporan</a></li>
                 
                 <hr class="mt-4">
-                <li class="nav-item"><a class="nav-link" href="<?= BASE_URL ?>/home.php"><i class="bi bi-house-fill me-2"></i> Ke Halaman Utama</a></li>
+                <h5 class="fw-bold mb-2 text-muted small px-3">Halaman Publik</h5>
+                <li class="nav-item"><a class="nav-link py-1" href="<?= BASE_URL ?>/home.php"><i class="bi bi-house-fill me-2"></i> Home</a></li>
+                <li class="nav-item"><a class="nav-link py-1" href="<?= BASE_URL ?>/service.php"><i class="bi bi-box-fill me-2"></i> Services</a></li>
+                <li class="nav-item"><a class="nav-link py-1" href="<?= BASE_URL ?>/about.php"><i class="bi bi-info-circle-fill me-2"></i> About Us</a></li>
+                <li class="nav-item"><a class="nav-link py-1" href="<?= BASE_URL ?>/contact.php"><i class="bi bi-envelope-fill me-2"></i> Contact</a></li>
 
             </ul>
         </div>

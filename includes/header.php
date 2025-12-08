@@ -116,7 +116,25 @@ $is_app_page = $user && in_array($current_page, $app_pages);
 <?php else: ?>
 
     <nav class="navbar navbar-expand-lg app-navbar py-3">
-        </nav>
+        <div class="app-container">
+            <a class="navbar-brand fw-bold text-primary" href="<?= BASE_URL ?>home.php">Laba Pintar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link <?= $current_page == 'home.php' ? 'active' : '' ?>" href="<?= BASE_URL ?>home.php">Home</a></li>
+                    <li class="nav-item"><a class="nav-link <?= $current_page == 'service.php' ? 'active' : '' ?>" href="<?= BASE_URL ?>service.php">Service</a></li>
+                    <li class="nav-item"><a class="nav-link <?= $current_page == 'about.php' ? 'active' : '' ?>" href="<?= BASE_URL ?>about.php">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link <?= $current_page == 'contact.php' ? 'active' : '' ?>" href="<?= BASE_URL ?>contact.php">Contact</a></li>
+                </ul>
+                <div class="d-flex">
+                    <a href="<?= BASE_URL ?>auth/login.php" class="btn btn-outline-primary fw-bold me-2">Login</a>
+                    <a href="<?= BASE_URL ?>auth/register.php" class="btn btn-primary fw-bold">Daftar</a>
+                </div>
+            </div>
+        </div>
+    </nav>
     <div class="container-fluid app-container mt-4">
 
 <?php endif; ?>

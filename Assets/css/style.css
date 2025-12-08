@@ -1,18 +1,16 @@
 /* ===== VARIABLES (Aplikasi Internal) ===== */
 :root {
-    --gap-desktop: 35px;
-    --gap-mobile: 18px;
-    --container-max-width: 1300px; 
-    --primary-color: #6366f1; 
-    --primary-dark: #4f46e5;
-    --primary-gradient-start: #7c3aed; 
-    --primary-gradient-end: #6366f1;
-    --app-bg: #f8fafc; 
+    --gap-desktop: 48px; /* Meningkatkan spasi untuk estetika minimalis */
+    --gap-mobile: 24px;
+    --container-max-width: 1200px; /* Lebar konten sedikit lebih sempit */
+    --primary-color: #635bff; /* Purple/Blue yang terinspirasi Stripe */
+    --primary-dark: #4c46c3;
+    --app-bg: #ffffff; /* Latar belakang putih bersih untuk kontras tinggi */
     --card-bg: #ffffff; 
-    --text-color: #1a202c; 
-    --text-muted: #64748b; 
-    --border-color: #e2e8f0; 
-    --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.05);
+    --text-color: #1a1a20; /* Teks yang lebih gelap */
+    --text-muted: #5a647d; 
+    --border-color: #e6e6e6; /* Border yang lebih halus */
+    --shadow-soft: 0 4px 16px rgba(0, 0, 0, 0.04);
     --sidebar-width: 260px;
 }
 
@@ -23,7 +21,7 @@ body {
     font-family: 'Inter', sans-serif;
     min-height: 100vh;
     transition: background-color 0.3s, color 0.3s;
-    padding-top: 70px; /* Default space for fixed Navbar (for public pages) */
+    padding-top: 80px; /* Ruang lebih besar untuk Navbar */
 }
 * { box-sizing: border-box; }
 .app-container {
@@ -37,18 +35,18 @@ body {
 /* APLIKASI POST-LOGIN (SIDEBAR LAYOUT) */
 /* ==================================== */
 body.app-layout {
-    padding-top: 0; /* Menonaktifkan padding navbar default */
+    padding-top: 0; 
 }
 .app-layout #main-layout-wrapper {
     display: flex;
     flex-grow: 1;
-    padding-top: 70px; /* Jarak untuk top-header */
+    padding-top: 70px; 
 }
 .app-layout #main-content-area {
     flex-grow: 1;
     padding: var(--gap-desktop);
     width: 100%;
-    margin-left: var(--sidebar-width); /* KUNCI: Mendorong konten ke kanan */
+    margin-left: var(--sidebar-width); 
     transition: margin-left 0.3s;
 }
 
@@ -65,14 +63,14 @@ body.app-layout {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+    box-shadow: none; /* Menghilangkan shadow */
     transition: padding-left 0.3s;
 }
 
 .app-sidebar {
     width: var(--sidebar-width, 260px);
     height: 100vh;
-    position: fixed; /* KUNCI: Membuatnya tetap di tempat */
+    position: fixed; 
     top: 0;
     left: 0;
     z-index: 1030;
@@ -80,7 +78,7 @@ body.app-layout {
     padding-top: 70px;
     border-right: 1px solid var(--border-color);
     flex-shrink: 0;
-    box-shadow: 1px 0 5px rgba(0,0,0,0.05);
+    box-shadow: none; /* Menghilangkan shadow */
     transition: transform 0.3s;
 }
 
@@ -96,11 +94,11 @@ body.app-layout {
 }
 .sidebar-nav .nav-link:hover {
     color: var(--primary-color);
-    background-color: #f1f5f9;
+    background-color: #f7f7f7; /* Hover lebih halus */
 }
 .sidebar-nav .nav-link.active {
     color: var(--primary-color);
-    background-color: #e0e7ff; 
+    background-color: #eeefff; /* Background active lebih terang */
     border-left-color: var(--primary-color);
     font-weight: 600;
 }
@@ -131,11 +129,14 @@ body.app-layout {
 .app-navbar {
     background: var(--card-bg) !important;
     border-bottom: 1px solid var(--border-color);
-    box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+    box-shadow: none; /* Menghilangkan shadow */
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 1030;
+    height: 80px; /* Navbar lebih tinggi */
+    padding-top: 0;
+    padding-bottom: 0;
 }
 .app-navbar .nav-link {
     font-weight: 500;
@@ -143,6 +144,9 @@ body.app-layout {
     padding: 8px 15px;
     border-radius: 6px;
     transition: all 0.2s;
+}
+.app-navbar .nav-link:hover {
+    background-color: #f7f7f7; /* Hover lebih halus */
 }
 .app-navbar .nav-link.active {
     color: white !important;
@@ -152,8 +156,9 @@ body.app-layout {
 
 /* Content */
 .page-title {
-    font-size: 30px;
+    font-size: 38px; /* Judul lebih besar */
     font-weight: 700;
+    letter-spacing: -0.5px;
     margin-bottom: var(--gap-desktop);
     color: var(--text-color);
 }
@@ -163,31 +168,66 @@ body.app-layout {
     border-radius: 12px;
     padding: var(--gap-desktop);
     margin-bottom: var(--gap-desktop);
-    box-shadow: var(--shadow-soft);
-    border: none; 
+    box-shadow: none; 
+    border: 1px solid var(--border-color); /* Menambah border tipis */
     transition: all 0.3s ease;
 }
 
 /* Interactive Effect */
+.app-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03); /* Shadow halus */
+    border: 1px solid var(--border-color); /* Menambah border tipis */
+}
 .interactive-card {
     transition: all 0.3s ease-in-out;
 }
 .interactive-card:hover {
-    transform: translateY(-5px) scale(1.01);
-    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
+    transform: translateY(-3px); /* Efek angkat yang tidak terlalu agresif */
+    box-shadow: 0 10px 30px rgba(99, 91, 255, 0.1); /* Bayangan dengan hint warna primer */
+}
+
+/* --- LANDING HERO SECTION (New Style) --- */
+.landing-hero {
+    background: #0b1120; /* Latar belakang sangat gelap untuk kontras maksimal */
+    color: #f1f5f9;
+    padding: 120px 0 140px 0; /* Padding vertikal besar */
+    margin-bottom: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.landing-title-home {
+    font-size: clamp(2.5rem, 5vw, 4.5rem); /* Judul responsif dan sangat besar */
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    margin-bottom: 1.5rem;
+    color: white !important; /* Memastikan teks putih */
+}
+
+.landing-header-subtitle {
+    font-size: 1.35rem;
+    font-weight: 300;
+    margin-bottom: 3rem;
+    color: #94a3b8 !important; /* Teks muted yang lebih terang */
 }
 
 /* Dark Mode Overrides */
 body.dark-mode {
-    --app-bg: #0f172a; 
-    --card-bg: #1e293b;
+    --app-bg: #0b1120; 
+    --card-bg: #151b2a;
     --text-color: #f1f5f9;
-    --primary-color: #818cf8;
-    --primary-dark: #6366f1;
+    --text-muted: #94a3b8;
+    --primary-color: #818cf8; 
+    --border-color: #2d3748; 
 }
 .dark-mode .app-navbar, .dark-mode .top-header-app, .dark-mode .app-sidebar, .dark-mode .content-section, .dark-mode .app-card {
-    background: var(--card-bg) !important;
-    border-color: #334155;
+    border-color: var(--border-color);
 }
-.dark-mode .app-sidebar .nav-link:hover { background-color: #111827; }
+.dark-mode .app-sidebar .nav-link:hover { background-color: #1f2937; }
 .dark-mode .app-sidebar .nav-link.active { background-color: #3730a3; }
+.dark-mode .landing-hero {
+    background: #0b1120; /* Tetap gelap di Dark Mode untuk impact */
+}

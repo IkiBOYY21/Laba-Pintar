@@ -41,7 +41,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 include __DIR__ . '/../includes/header.php';
 ?>
 <div class="landing-wrapper" style="min-height: calc(100vh - 140px);">
-    <div class="auth-card">
+    <div class="auth-card app-card p-4">
         <h4 class="fw-bold mb-3">Daftar Akun Baru</h4>
         <p class="text-muted mb-4">Isi data di bawah untuk memulai.</p>
 
@@ -81,7 +81,7 @@ include __DIR__ . '/../includes/header.php';
 
             <div class="mt-4">
                 <button class="btn btn-primary w-100 py-2 fw-bold"><i class="bi bi-person-plus-fill me-2"></i> DAFTAR</button>
-                <a href="<?= BASE_URL ?>auth/login.php" class="btn btn-secondary w-100 mt-2 py-2">
+                <a href="<?= BASE_URL ?>auth/login.php" class="btn btn-outline-secondary w-100 mt-2 py-2">
                     Sudah punya akun? Login
                 </a>
             </div>

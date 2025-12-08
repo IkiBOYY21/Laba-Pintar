@@ -25,7 +25,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 include __DIR__ . '/../includes/header.php';
 ?>
 <div class="d-flex justify-content-center align-items-center" style="min-height: calc(100vh - 140px);">
-    <div class="auth-card text-center">
+    <div class="auth-card app-card text-center p-4">
         <h4 class="fw-bold mb-3">Login ke Akun Anda</h4>
         <p class="text-muted mb-4">Akses dashboard Anda untuk mengelola data.</p>
         <form method="post" action="<?= BASE_URL ?>/auth/login.php">
@@ -42,7 +42,7 @@ include __DIR__ . '/../includes/header.php';
                 <i class="bi bi-box-arrow-in-right me-2"></i> MASUK
             </button>
         </form>
-        <p class="mt-3 text-muted">
+        <p class="mt-3 text-muted small">
             Belum punya akun? <a href="<?= BASE_URL ?>auth/register.php" class="text-primary fw-bold text-decoration-none">Daftar Sekarang</a>
         </p>
     </div>
