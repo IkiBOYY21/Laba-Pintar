@@ -1,27 +1,35 @@
 /* ===== VARIABLES (Aplikasi Internal) ===== */
 :root {
-    --gap-desktop: 48px; /* Meningkatkan spasi untuk estetika minimalis */
-    --gap-mobile: 24px;
-    --container-max-width: 1200px; /* Lebar konten sedikit lebih sempit */
-    --primary-color: #635bff; /* Purple/Blue yang terinspirasi Stripe */
-    --primary-dark: #4c46c3;
-    --app-bg: #ffffff; /* Latar belakang putih bersih untuk kontras tinggi */
+    /* MENGURANGI JARAK TEPI GLOBAL AGAR KONTEN LEBIH LUAS */
+    --gap-desktop: 30px; 
+    --gap-mobile: 20px;
+    --container-max-width: 1200px;
+    --header-height: 60px; /* HEADER LEBIH PENDEK */
+    /* WARNA BARU BERDASARKAN PALET TEAL/CYAN DARI GAMBAR */
+    --primary-color: #009688; 
+    --primary-light: #4db6ac; 
+    --primary-dark: #00796b; 
+
+    --app-bg: #f5f7f9; 
     --card-bg: #ffffff; 
-    --text-color: #1a1a20; /* Teks yang lebih gelap */
+    --text-color: #1a1a20;
     --text-muted: #5a647d; 
-    --border-color: #e6e6e6; /* Border yang lebih halus */
+    --border-color: #e6e6e6;
     --shadow-soft: 0 4px 16px rgba(0, 0, 0, 0.04);
     --sidebar-width: 260px;
+    --mobile-sidebar-width: 280px;
+    --mini-sidebar-width: 80px; 
 }
 
-/* ===== BASE LAYOUT (Global) ===== */
+/* ===== BASE LAYOUT (Global) */
 body {
     background: var(--app-bg);
     color: var(--text-color);
     font-family: 'Inter', sans-serif;
     min-height: 100vh;
     transition: background-color 0.3s, color 0.3s;
-    padding-top: 80px; /* Ruang lebih besar untuk Navbar */
+    padding-top: var(--header-height);
+    overflow-x: hidden; 
 }
 * { box-sizing: border-box; }
 .app-container {
@@ -30,6 +38,24 @@ body {
     padding-left: var(--gap-desktop);
     padding-right: var(--gap-desktop);
 }
+/* Memastikan tombol menggunakan warna baru */
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:focus {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: var(--primary-color);
+    --bs-btn-border-color: var(--primary-color);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: var(--primary-dark);
+    --bs-btn-hover-border-color: var(--primary-dark);
+    --bs-btn-active-bg: var(--primary-dark);
+    --bs-btn-active-border-color: var(--primary-dark);
+}
+.btn-outline-primary {
+    --bs-btn-color: var(--primary-color);
+    --bs-btn-border-color: var(--primary-color);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: var(--primary-color);
+    --bs-btn-hover-border-color: var(--primary-color);
+}
 
 /* ==================================== */
 /* APLIKASI POST-LOGIN (SIDEBAR LAYOUT) */
@@ -37,49 +63,185 @@ body {
 body.app-layout {
     padding-top: 0; 
 }
+
+/* WRAPPER FOR PUSH EFFECT */
+#app-content-wrapper {
+    position: relative; 
+    transition: transform 0.3s ease-in-out;
+    min-height: 100vh;
+}
+/* PUSH effect for mobile when sidebar is shown */
+.offcanvas.show ~ #app-content-wrapper {
+    transform: translateX(var(--mobile-sidebar-width)); 
+}
+
+
 .app-layout #main-layout-wrapper {
     display: flex;
     flex-grow: 1;
-    padding-top: 70px; 
+    padding-top: var(--header-height); 
 }
 .app-layout #main-content-area {
     flex-grow: 1;
-    padding: var(--gap-desktop);
+    padding: var(--gap-desktop); 
     width: 100%;
-    margin-left: var(--sidebar-width); 
+    margin-left: 0; 
     transition: margin-left 0.3s;
 }
 
 .top-header-app {
     position: fixed;
     top: 0;
-    left: 0;
-    right: 0;
-    height: 70px;
+    width: 100%; 
+    left: 0; 
+    height: var(--header-height); 
     z-index: 1030;
-    background: var(--card-bg);
-    border-bottom: 1px solid var(--border-color);
-    padding: 0 20px 0 calc(var(--sidebar-width) + 20px);
+    /* --- PERUBAHAN WARNA HEADER UTAMA --- */
+    background: var(--primary-color); 
+    border-bottom: 1px solid var(--primary-dark);
+    color: white; /* Default text color in header */
+    /* --- END PERUBAHAN --- */
+    padding: 0 20px; 
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-shadow: none; /* Menghilangkan shadow */
-    transition: padding-left 0.3s;
+    box-shadow: none;
+    transition: width 0.3s, left 0.3s; 
+}
+/* Penyesuaian warna teks dan tombol di header */
+.top-header-app .text-primary, 
+.top-header-app .text-muted,
+.top-header-app .btn-outline-primary {
+    color: white !important;
+}
+.top-header-app .btn-outline-primary {
+    border-color: white !important;
+}
+.top-header-app .btn-outline-primary:hover {
+    color: var(--primary-color) !important;
+    background-color: white !important;
 }
 
+
 .app-sidebar {
-    width: var(--sidebar-width, 260px);
+    width: var(--mobile-sidebar-width, 280px);
     height: 100vh;
     position: fixed; 
     top: 0;
     left: 0;
     z-index: 1030;
     background: var(--card-bg);
-    padding-top: 70px;
-    border-right: 1px solid var(--border-color);
+    padding-top: var(--header-height); 
+    border-right: none; 
     flex-shrink: 0;
-    box-shadow: none; /* Menghilangkan shadow */
+    box-shadow: none;
     transition: transform 0.3s;
+}
+
+/* DESKTOP LAYOUT (>= 992px) */
+@media (min-width: 992px) {
+    /* MENGATUR LEBAR KONTEN DAN SIDEBAR DI DESKTOP NORMAL */
+    #app-content-wrapper {
+        margin-left: var(--sidebar-width);
+        transform: none !important; 
+        transition: margin-left 0.3s; 
+    }
+    
+    .app-sidebar.offcanvas {
+        visibility: visible !important;
+        transform: none !important;
+        position: fixed; 
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: var(--sidebar-width);
+        border-right: 1px solid var(--border-color); 
+        transition: width 0.3s; 
+    }
+    
+    /* MENGATUR POSISI HEADER FIXED DI DESKTOP NORMAL */
+    .top-header-app {
+        width: calc(100% - var(--sidebar-width));
+        left: var(--sidebar-width);
+        padding: 0 20px;
+    }
+
+    /* === SIDEBAR CLOSED STATE === */
+    body.sidebar-closed #app-content-wrapper {
+        margin-left: var(--mini-sidebar-width);
+    }
+    body.sidebar-closed .app-sidebar.offcanvas {
+        width: var(--mini-sidebar-width);
+    }
+    body.sidebar-closed .top-header-app {
+        width: calc(100% - var(--mini-sidebar-width));
+        left: var(--mini-sidebar-width);
+    }
+    
+    /* HIDE TEXT LABELS & TITLES */
+    body.sidebar-closed .app-sidebar .sidebar-nav .nav-label,
+    body.sidebar-closed .app-sidebar .sidebar-nav .bi-chevron-down,
+    body.sidebar-closed .app-sidebar .offcanvas-body h5:not(.small) {
+        display: none;
+    }
+
+    /* HIDE JUDUL NAVIGATION SECTION */
+    body.sidebar-closed .app-sidebar .offcanvas-body .fw-bold.mb-4.text-primary {
+        display: none;
+    }
+    body.sidebar-closed .app-sidebar .offcanvas-body .fw-bold.mb-2.text-muted.small {
+        display: none;
+    }
+    body.sidebar-closed .app-sidebar .offcanvas-body hr {
+        display: none;
+    }
+    body.sidebar-closed .app-sidebar .offcanvas-body {
+        padding-top: 20px !important; 
+    }
+    
+    /* CENTER THE ICONS AND ADJUST PADDING */
+    body.sidebar-closed .app-sidebar .sidebar-nav .nav-link {
+        justify-content: center;
+        padding: 15px 0; 
+        border-left: none !important;
+        text-align: center;
+    }
+    
+    /* RAPIKAN ICON MARGIN DAN ACTIVE STATE */
+    body.sidebar-closed .app-sidebar .sidebar-nav .nav-link i {
+        margin-right: 0 !important; 
+    }
+    body.sidebar-closed .app-sidebar .nav-link.active {
+        border-radius: 0; 
+        background-color: var(--primary-light);
+    }
+    body.sidebar-closed .app-sidebar .nav-link:hover {
+        background-color: var(--primary-light);
+    }
+
+    /* RAPIKAN MENU MASTER DATA (SUB-MENU) */
+    body.sidebar-closed #masterData {
+        position: absolute; 
+        background: var(--card-bg);
+        z-index: 1000;
+        width: 200px;
+        box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+        left: var(--mini-sidebar-width);
+        display: none; 
+    }
+    body.sidebar-closed .sidebar-nav .nav-item:hover #masterData {
+        display: block; 
+    }
+    body.sidebar-closed .sidebar-nav .nav-item {
+        position: relative;
+    }
+    body.sidebar-closed #masterData ul.ms-3 {
+        padding-left: 0 !important;
+    }
+    body.sidebar-closed #masterData .nav-link {
+        justify-content: start; 
+        padding-left: 15px !important;
+    }
 }
 
 /* Sidebar Nav Styling */
@@ -94,140 +256,224 @@ body.app-layout {
 }
 .sidebar-nav .nav-link:hover {
     color: var(--primary-color);
-    background-color: #f7f7f7; /* Hover lebih halus */
+    background-color: #f7f7f7;
 }
 .sidebar-nav .nav-link.active {
-    color: var(--primary-color);
-    background-color: #eeefff; /* Background active lebih terang */
-    border-left-color: var(--primary-color);
+    color: var(--primary-dark);
+    background-color: var(--primary-light);
+    border-left-color: var(--primary-dark);
     font-weight: 600;
+    border-radius: 0 10px 10px 0; 
+}
+.sidebar-nav .nav-link.active i {
+    color: var(--primary-dark);
+}
+/* MENGHAPUS BACKGROUND PADA ICON STAT CARD (LIGHT MODE) */
+.stat-card i {
+    /* Background default di light mode, dihilangkan agar transparan */
+    background: transparent !important; 
+    padding: 0 !important; /* Hapus padding yang membuat kotak */
+    border-radius: 0 !important;
+    opacity: 1; 
+}
+.sidebar-nav .nav-link i {
+    color: var(--text-muted);
+    transition: color 0.2s;
+}
+.sidebar-nav .nav-link:hover i {
+    color: var(--primary-color);
+}
+.sidebar-nav h5.text-primary {
+    color: var(--primary-dark) !important;
 }
 
-/* Media Queries untuk Mobile Sidebar */
-@media (max-width: 992px) {
-    .app-layout #main-content-area {
-        margin-left: 0; 
-        padding-left: var(--gap-mobile);
-        padding-right: var(--gap-mobile);
-    }
-    .top-header-app {
-        padding-left: 20px; 
-    }
-    .app-sidebar {
-        transform: translateX(-100%);
-        width: 280px;
-    }
-    .app-sidebar.show {
-        transform: translateX(0);
-    }
-}
-
-
-/* ===== SHARED STYLES (Navbar, Cards, Buttons) ===== */
-
-/* Navbar (Used for Landing/Pre-Login) */
+/* --- PERBAIKAN NAV BAR PRA-LOGIN --- */
 .app-navbar {
-    background: var(--card-bg) !important;
-    border-bottom: 1px solid var(--border-color);
-    box-shadow: none; /* Menghilangkan shadow */
+    /* Gunakan warna primer untuk latar belakang navbar pra-login */
+    background: var(--primary-color) !important; 
+    border-bottom: 1px solid var(--primary-dark);
+    box-shadow: none;
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 1030;
-    height: 80px; /* Navbar lebih tinggi */
+    height: var(--header-height);
     padding-top: 0;
     padding-bottom: 0;
 }
+.app-navbar .navbar-brand {
+    color: white !important; /* Logo menjadi putih */
+}
 .app-navbar .nav-link {
     font-weight: 500;
-    color: var(--text-color) !important;
-    padding: 8px 15px;
+    color: white !important; /* Link menjadi putih */
+    /* PENINGKATAN SPASI HORIZONTAL UNTUK MERAPIKAN TAMPILAN */
+    padding: 10px 25px; 
     border-radius: 6px;
     transition: all 0.2s;
 }
 .app-navbar .nav-link:hover {
-    background-color: #f7f7f7; /* Hover lebih halus */
+    background-color: rgba(255, 255, 255, 0.1); /* Hover putih transparan */
 }
 .app-navbar .nav-link.active {
-    color: white !important;
-    background: var(--primary-color);
+    color: var(--primary-dark) !important;
+    background: white; /* Link aktif menjadi putih solid */
     font-weight: 600;
 }
+.app-navbar .btn-outline-primary {
+    --bs-btn-color: white;
+    --bs-btn-border-color: white;
+    --bs-btn-hover-color: var(--primary-color);
+    --bs-btn-hover-bg: white;
+}
+/* --- END PERBAIKAN NAV BAR PRA-LOGIN --- */
 
-/* Content */
-.page-title {
-    font-size: 38px; /* Judul lebih besar */
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    margin-bottom: var(--gap-desktop);
-    color: var(--text-color);
-}
 
-.content-section {
-    background: var(--card-bg);
-    border-radius: 12px;
-    padding: var(--gap-desktop);
-    margin-bottom: var(--gap-desktop);
-    box-shadow: none; 
-    border: 1px solid var(--border-color); /* Menambah border tipis */
-    transition: all 0.3s ease;
-}
-
-/* Interactive Effect */
-.app-card {
-    background: var(--card-bg);
-    border-radius: 12px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03); /* Shadow halus */
-    border: 1px solid var(--border-color); /* Menambah border tipis */
-}
-.interactive-card {
-    transition: all 0.3s ease-in-out;
-}
-.interactive-card:hover {
-    transform: translateY(-3px); /* Efek angkat yang tidak terlalu agresif */
-    box-shadow: 0 10px 30px rgba(99, 91, 255, 0.1); /* Bayangan dengan hint warna primer */
-}
-
-/* --- LANDING HERO SECTION (New Style) --- */
+/* --- LANDING HERO SECTION --- */
 .landing-hero {
-    background: #0b1120; /* Latar belakang sangat gelap untuk kontras maksimal */
+    background: #0b1120;
     color: #f1f5f9;
-    padding: 120px 0 140px 0; /* Padding vertikal besar */
+    padding: 120px 0 140px 0;
     margin-bottom: 0;
     position: relative;
     overflow: hidden;
 }
 
 .landing-title-home {
-    font-size: clamp(2.5rem, 5vw, 4.5rem); /* Judul responsif dan sangat besar */
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
     font-weight: 800;
     line-height: 1.1;
     letter-spacing: -1.5px;
-    margin-bottom: 1.5rem;
-    color: white !important; /* Memastikan teks putih */
+    color: white !important;
 }
 
 .landing-header-subtitle {
     font-size: 1.35rem;
     font-weight: 300;
     margin-bottom: 3rem;
-    color: #94a3b8 !important; /* Teks muted yang lebih terang */
+    color: #94a3b8 !important;
 }
 
-/* Dark Mode Overrides */
+/* EFEK INTERAKTIF TAMBAHAN */
+.interactive-button {
+    transition: all 0.2s ease-in-out;
+    transform-origin: center;
+}
+.interactive-button:hover {
+    transform: scale(1.03) translateY(-1px);
+    box-shadow: 0 8px 15px rgba(0, 150, 136, 0.3);
+}
+.feature-hover {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.feature-hover:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.08), 0 10px 10px rgba(0,0,0,0.06);
+    transform: translateY(-5px);
+}
+.feature-hover i {
+    transition: all 0.3s;
+}
+.feature-hover:hover i {
+    opacity: 0.9;
+    transform: scale(1.1);
+}
+
+/* ==================================== */
+/* PERBAIKAN DARK MODE OVERRIDES KUAT */
+/* ==================================== */
 body.dark-mode {
     --app-bg: #0b1120; 
     --card-bg: #151b2a;
     --text-color: #f1f5f9;
     --text-muted: #94a3b8;
-    --primary-color: #818cf8; 
+    --primary-color: #4db6ac; 
+    --primary-light: #00796b;
+    --primary-dark: #009688;
     --border-color: #2d3748; 
+    
+    /* PAKSA WARNA LATAR BELAKANG DAN TEKS PADA BODY */
+    background: var(--app-bg) !important;
+    color: var(--text-color) !important;
 }
-.dark-mode .app-navbar, .dark-mode .top-header-app, .dark-mode .app-sidebar, .dark-mode .content-section, .dark-mode .app-card {
-    border-color: var(--border-color);
+
+.dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4, .dark-mode h5, .dark-mode p, .dark-mode td, .dark-mode th {
+    color: var(--text-color) !important;
 }
+
+.dark-mode .app-navbar, 
+.dark-mode .app-sidebar, 
+.dark-mode .content-section, 
+.dark-mode .app-card,
+.dark-mode .auth-card {
+    background-color: var(--card-bg) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-color) !important; 
+}
+.dark-mode .app-navbar {
+    background: var(--app-bg) !important; /* Navbar pra-login di dark mode */
+}
+
+/* KHUSUS HEADER DARK MODE: JADIKAN SEPERTI APP BG/LEBIH GELAP */
+.dark-mode .top-header-app {
+    background-color: var(--app-bg) !important; 
+    border-color: var(--border-color) !important;
+    color: var(--text-color) !important; 
+}
+
+/* KHUSUS SIDEBAR ACTIVE LINK DI DARK MODE */
+.dark-mode .app-sidebar .nav-link.active { 
+    background-color: var(--primary-light) !important;
+    color: var(--text-color) !important;
+}
+
+
+.dark-mode .top-header-app .text-primary,
+.dark-mode .top-header-app .text-muted {
+    color: var(--text-color) !important;
+}
+.dark-mode .top-header-app .btn-outline-primary {
+    color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+}
+.dark-mode .top-header-app .btn-outline-primary:hover {
+    color: var(--text-color) !important;
+    background-color: var(--primary-color) !important;
+}
+
+
+.dark-mode .text-muted {
+    color: var(--text-muted) !important;
+}
+
+/* Override untuk input dan textarea di dark mode */
+.dark-mode .form-control, .dark-mode .form-floating>.form-control {
+    background-color: var(--primary-light) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+.dark-mode .form-floating>label {
+    color: var(--text-muted) !important;
+}
+
 .dark-mode .app-sidebar .nav-link:hover { background-color: #1f2937; }
-.dark-mode .app-sidebar .nav-link.active { background-color: #3730a3; }
+
+
 .dark-mode .landing-hero {
-    background: #0b1120; /* Tetap gelap di Dark Mode untuk impact */
+    background: #0b1120;
+}
+.dark-mode .toggle-dot {
+    background: var(--text-color);
+}
+
+/* Perbaikan kontras ikon stat card di dark mode (Hapus background kotak) */
+.dark-mode .stat-card i.text-success { background: transparent !important; color: #28a745 !important; }
+.dark-mode .stat-card i.text-primary { background: transparent !important; color: var(--primary-color) !important; }
+.dark-mode .stat-card i.text-info { background: transparent !important; color: #17a2b8 !important; }
+.dark-mode .stat-card i.text-danger { background: transparent !important; color: #dc3545 !important; }
+
+/* FIX NABRAK: Table Header di Dark Mode */
+.dark-mode .table thead, .dark-mode .table thead th {
+    background-color: #212939 !important; 
+    color: var(--text-color) !important; 
+    border-bottom-color: var(--border-color) !important;
 }

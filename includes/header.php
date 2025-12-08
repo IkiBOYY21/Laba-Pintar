@@ -23,46 +23,7 @@ $is_app_page = $user && in_array($current_page, $app_pages);
   <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/style.css">
 
   <style>
-    /* INLINE CRITICAL CSS FOR SIDEBAR LAYOUT */
-    body.app-layout {
-        padding-top: 0; /* Menghilangkan padding navbar default */
-    }
-    .app-layout #main-layout-wrapper {
-        display: flex;
-        flex-grow: 1;
-        padding-top: 70px; /* Jarak untuk top-header */
-    }
-    .app-layout #main-content-area {
-        flex-grow: 1;
-        padding: var(--gap-desktop);
-        width: 100%;
-        margin-left: var(--sidebar-width, 260px); /* PENTING: Mendorong konten */
-        transition: margin-left 0.3s;
-    }
-
-    .top-header-app {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 70px;
-        z-index: 1030;
-        padding: 0 20px 0 calc(var(--sidebar-width, 260px) + 20px);
-        /* Sisanya diurus oleh style.css */
-    }
-
-    .app-sidebar {
-        width: var(--sidebar-width, 260px);
-        height: 100vh;
-        position: fixed; /* KUNCI: Membuatnya tetap di tempat */
-        top: 0;
-        left: 0;
-        z-index: 1030;
-        padding-top: 70px;
-        /* Sisanya diurus oleh style.css */
-    }
-
-    /* Toggle and other small CSS rules */
+    /* ATURAN UNTUK DARK MODE TOGGLE (TETAP DI SINI KARENA CRITICAL) */
     .toggle-dark {
         width: 50px; height: 26px; border-radius: 20px; background: var(--border-color); position: relative; cursor: pointer; transition: .3s;
     }
@@ -70,10 +31,11 @@ $is_app_page = $user && in_array($current_page, $app_pages);
         width: 22px; height: 22px; border-radius: 50%; background: #fff; position: absolute; top: 2px; left: 2px; transition: .3s; box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     }
     body.dark-mode .toggle-dot {
-        transform: translateX(24px); background: var(--primary-color);
+        transform: translateX(24px); 
+        background: var(--text-color); 
     }
     body.dark-mode .toggle-dark {
-        background: var(--border-color);
+        background: var(--primary-light); 
     }
   </style>
 </head>
@@ -88,50 +50,62 @@ $is_app_page = $user && in_array($current_page, $app_pages);
 
 <?php if($is_app_page): ?>
     
-    <header class="top-header-app d-flex justify-content-between align-items-center">
-        <div class="d-flex align-items-center">
-            <button class="btn btn-sm btn-outline-primary d-lg-none me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas">
-                <i class="bi bi-list"></i>
-            </button>
-            <span class="fw-bold fs-5 text-primary d-none d-lg-block">Laba Pintar</span> </div>
-        
-        <div class="d-flex align-items-center gap-3">
-            <span class="user-info d-none d-lg-inline text-muted small">Halo, <?= esc($user['nama']) ?></span>
-            
-            <div id="darkToggle" class="toggle-dark">
-                <div class="toggle-dot"></div>
-            </div>
-
-            <a class="btn btn-sm btn-danger" href="<?= BASE_URL ?>/auth/logout.php">
-                <i class="bi bi-box-arrow-right"></i> Logout
-            </a>
-        </div>
-    </header>
-    
     <?php include __DIR__ . '/sidebar.php'; // WAJIB: Memanggil konten Sidebar ?>
+    
+    <div id="app-content-wrapper"> 
 
-    <div id="main-layout-wrapper">
-        <div id="main-content-area" class="container-fluid">
+        <header class="top-header-app d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                
+                <button type="button" id="sidebarToggleDesktop" class="btn btn-sm btn-outline-primary d-none d-lg-block me-3">
+                    <i class="bi bi-list"></i>
+                </button>
+                
+                <button class="btn btn-sm btn-outline-primary d-lg-none me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas">
+                    <i class="bi bi-list"></i>
+                </button>
+                <span class="fw-bold fs-5 text-primary d-none d-lg-block">Laba Pintar</span> </div>
+            
+            <div class="d-flex align-items-center gap-3">
+                <span class="user-info d-none d-lg-inline text-muted small">Halo, <?= esc($user['nama']) ?></span>
+                
+                <div id="darkToggle" class="toggle-dark">
+                    <div class="toggle-dot"></div>
+                </div>
+
+                <a class="btn btn-sm btn-danger" href="<?= BASE_URL ?>/auth/logout.php">
+                    <i class="bi bi-box-arrow-right"></i> Logout
+                </a>
+            </div>
+        </header>
+
+        <div id="main-layout-wrapper">
+            <div id="main-content-area" class="container-fluid">
 
 <?php else: ?>
 
     <nav class="navbar navbar-expand-lg app-navbar py-3">
         <div class="app-container">
             <a class="navbar-brand fw-bold text-primary" href="<?= BASE_URL ?>home.php">Laba Pintar</a>
+            
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mx-auto">
+                <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item"><a class="nav-link <?= $current_page == 'home.php' ? 'active' : '' ?>" href="<?= BASE_URL ?>home.php">Home</a></li>
                     <li class="nav-item"><a class="nav-link <?= $current_page == 'service.php' ? 'active' : '' ?>" href="<?= BASE_URL ?>service.php">Service</a></li>
                     <li class="nav-item"><a class="nav-link <?= $current_page == 'about.php' ? 'active' : '' ?>" href="<?= BASE_URL ?>about.php">About Us</a></li>
                     <li class="nav-item"><a class="nav-link <?= $current_page == 'contact.php' ? 'active' : '' ?>" href="<?= BASE_URL ?>contact.php">Contact</a></li>
+                    
+                    <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
+                        <div class="d-flex">
+                            <a href="<?= BASE_URL ?>auth/login.php" class="btn btn-outline-primary fw-bold me-2">Login</a>
+                            <a href="<?= BASE_URL ?>auth/register.php" class="btn btn-primary fw-bold">Daftar</a>
+                        </div>
+                    </li>
                 </ul>
-                <div class="d-flex">
-                    <a href="<?= BASE_URL ?>auth/login.php" class="btn btn-outline-primary fw-bold me-2">Login</a>
-                    <a href="<?= BASE_URL ?>auth/register.php" class="btn btn-primary fw-bold">Daftar</a>
-                </div>
             </div>
         </div>
     </nav>

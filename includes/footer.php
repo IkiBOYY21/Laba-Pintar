@@ -2,7 +2,7 @@
 // ikiboyy21/laba-pintar/Laba-Pintar-074ca69357fb28dc6f11b9e6d279be5dd0ec7c2c/includes/footer.php
 
 if(is_logged_in()): ?>
-        </div> </div> <script>
+        </div> </div> </div> <script>
     // Logic untuk mengaktifkan offcanvas sidebar di mobile
     document.addEventListener('DOMContentLoaded', () => {
         const sidebar = document.getElementById('sidebarOffcanvas');

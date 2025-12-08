@@ -38,7 +38,7 @@ include 'includes/header.php';
     </div>
     <div class="col-lg-3 col-md-6">
       <div class="app-card stat-card interactive-card p-3 d-flex align-items-center">
-        <i class="bi bi-graph-up-arrow fs-2 text-warning me-3"></i>
+        <i class="bi bi-graph-up-arrow fs-2 text-info me-3"></i>
         <div class="value-box">
           <div class="title text-muted small">Pendapatan Bersih</div>
           <div class="value fw-bold fs-4">Rp <?= number_format($pendapatan,0,',','.') ?></div>
@@ -71,7 +71,7 @@ include 'includes/header.php';
           <td><?= esc($r['tanggal']) ?></td>
           <td>Rp <?= number_format($r['total'],0,',','.') ?></td>
           <td><?= esc($r['catatan']) ?></td>
-          <td><a class="btn btn-sm btn-info text-white" href="<?= BASE_URL ?>/detail_transaksi.php?id=<?= $r['id_transaksi'] ?>"><i class="bi bi-eye"></i> Lihat</a></td>
+          <td><a class="btn btn-sm btn-primary text-white" href="<?= BASE_URL ?>/detail_transaksi.php?id=<?= $r['id_transaksi'] ?>"><i class="bi bi-eye"></i> Lihat</a></td>
         </tr>
         <?php endwhile; ?>
       </tbody>
