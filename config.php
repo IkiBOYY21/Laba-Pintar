@@ -1,3 +1,4 @@
+
 <?php
 $host = "localhost";
 $user = "root";
@@ -10,5 +11,6 @@ if(!$conn){
     die("Gagal terhubung ke database: " . mysqli_connect_error());
 }
 
-define("BASE_URL", "http://localhost/labapintar/");
+// PASTIKAN BASE_URL SESUAI DENGAN LOKASI PROYEK ANDA
+define("BASE_URL", "http://localhost/labapintar/"); 
 ?>

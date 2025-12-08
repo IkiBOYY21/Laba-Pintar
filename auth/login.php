@@ -22,7 +22,29 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         exit;
     }
 }
-
 include __DIR__ . '/../includes/header.php';
-echo "<script>var loginModal = new bootstrap.Modal(document.getElementById('loginModal')); loginModal.show();</script>";
-include __DIR__ . '/../includes/footer.php';
+?>
+<div class="d-flex justify-content-center align-items-center" style="min-height: calc(100vh - 140px);">
+    <div class="auth-card text-center">
+        <h4 class="fw-bold mb-3">Login ke Akun Anda</h4>
+        <p class="text-muted mb-4">Akses dashboard Anda untuk mengelola data.</p>
+        <form method="post" action="<?= BASE_URL ?>/auth/login.php">
+            <div class="form-floating mb-3">
+                <input type="email" name="email" class="form-control" id="loginEmail" placeholder="Email" required>
+                <label for="loginEmail">Email</label>
+            </div>
+            <div class="form-floating mb-4">
+                <input type="password" name="password" class="form-control" id="loginPassword" placeholder="Password" required>
+                <label for="loginPassword">Password</label>
+            </div>
+
+            <button class="btn btn-primary w-100 mb-3 py-2 fw-bold">
+                <i class="bi bi-box-arrow-in-right me-2"></i> MASUK
+            </button>
+        </form>
+        <p class="mt-3 text-muted">
+            Belum punya akun? <a href="<?= BASE_URL ?>auth/register.php" class="text-primary fw-bold text-decoration-none">Daftar Sekarang</a>
+        </p>
+    </div>
+</div>
+<?php include __DIR__ . '/../includes/footer.php'; ?>

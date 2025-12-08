@@ -13,29 +13,70 @@ $pengeluaran = $conn->query("SELECT IFNULL(SUM(jumlah),0) as s FROM pengeluaran 
 
 include 'includes/header.php';
 ?>
-<h3>Dashboard</h3>
-<div class="row">
-  <div class="col-md-3"><div class="card p-3">Produk<br><strong><?= $tot_produk ?></strong></div></div>
-  <div class="col-md-3"><div class="card p-3">Transaksi<br><strong><?= $tot_transaksi ?></strong></div></div>
-  <div class="col-md-3"><div class="card p-3">Pendapatan<br><strong>Rp <?= number_format($pendapatan,0,',','.') ?></strong></div></div>
-  <div class="col-md-3"><div class="card p-3">Pengeluaran<br><strong>Rp <?= number_format($pengeluaran,0,',','.') ?></strong></div></div>
+<h1 class="page-title">Dashboard Utama</h1>
+
+<div class="content-section mb-4 p-4">
+  <h4 class="mb-4">Ringkasan Keuangan</h4>
+  <div class="row g-4">
+    <div class="col-lg-3 col-md-6">
+      <div class="app-card stat-card interactive-card">
+        <div class="icon-box" style="background: #22c55e;"><i class="bi bi-box-seam"></i></div>
+        <div class="value-box">
+          <div class="title">Total Produk</div>
+          <div class="value"><?= $tot_produk ?></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+      <div class="app-card stat-card interactive-card">
+        <div class="icon-box" style="background: #3b82f6;"><i class="bi bi-cart3"></i></div>
+        <div class="value-box">
+          <div class="title">Total Transaksi</div>
+          <div class="value"><?= $tot_transaksi ?></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+      <div class="app-card stat-card interactive-card">
+        <div class="icon-box" style="background: #f97316;"><i class="bi bi-graph-up-arrow"></i></div>
+        <div class="value-box">
+          <div class="title">Pendapatan Bersih</div>
+          <div class="value">Rp <?= number_format($pendapatan,0,',','.') ?></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+      <div class="app-card stat-card interactive-card">
+        <div class="icon-box" style="background: #ef4444;"><i class="bi bi-graph-down-arrow"></i></div>
+        <div class="value-box">
+          <div class="title">Total Pengeluaran</div>
+          <div class="value">Rp <?= number_format($pengeluaran,0,',','.') ?></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<h4 class="mt-4">Transaksi Terakhir</h4>
-<table class="table table-sm">
-  <thead><tr><th>Tanggal</th><th>Total</th><th>Catatan</th></tr></thead>
-  <tbody>
-    <?php
-    $rs = $conn->query("SELECT * FROM transaksi_penjualan WHERE id_user = $uid ORDER BY created_at DESC LIMIT 5");
-    while($r = $rs->fetch_assoc()):
-    ?>
-    <tr>
-      <td><?= esc($r['tanggal']) ?></td>
-      <td>Rp <?= number_format($r['total'],0,',','.') ?></td>
-      <td><?= esc($r['catatan']) ?></td>
-    </tr>
-    <?php endwhile; ?>
-  </tbody>
-</table>
+<div class="content-section">
+  <h4 class="mb-3">Transaksi Terakhir (5 Data)</h4>
+  <div class="table-responsive">
+    <table class="table data-table table-borderless">
+      <thead><tr><th>Tanggal</th><th>Total</th><th>Catatan</th><th>Aksi</th></tr></thead>
+      <tbody>
+        <?php
+        $rs = $conn->query("SELECT * FROM transaksi_penjualan WHERE id_user = $uid ORDER BY created_at DESC LIMIT 5");
+        while($r = $rs->fetch_assoc()):
+        ?>
+        <tr>
+          <td><?= esc($r['tanggal']) ?></td>
+          <td>Rp <?= number_format($r['total'],0,',','.') ?></td>
+          <td><?= esc($r['catatan']) ?></td>
+          <td><a class="btn btn-sm btn-info text-white" href="<?= BASE_URL ?>/detail_transaksi.php?id=<?= $r['id_transaksi'] ?>"><i class="bi bi-eye"></i> Lihat</a></td>
+        </tr>
+        <?php endwhile; ?>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 <?php include 'includes/footer.php'; ?>

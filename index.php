@@ -3,6 +3,7 @@ require_once 'helpers.php';
 if(is_logged_in()){
     header('Location: '.BASE_URL.'dashboard.php');
 } else {
-    header('Location: '.BASE_URL.'auth/login.php');
+    // Arahkan ke Halaman Home/Landing baru
+    header('Location: '.BASE_URL.'home.php'); 
 }
 exit;
