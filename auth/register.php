@@ -40,10 +40,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 }
 include __DIR__ . '/../includes/header.php';
 ?>
-<div class="landing-wrapper" style="min-height: calc(100vh - 140px);">
-    <div class="auth-card app-card p-4">
-        <h4 class="fw-bold mb-3">Daftar Akun Baru</h4>
-        <p class="text-muted mb-4">Isi data di bawah untuk memulai.</p>
+
+<div class="d-flex justify-content-center align-items-center" style="min-height: calc(100vh - 140px);">
+    
+    <div class="auth-card app-card p-4" style="max-width: 500px; width: 100%;">
+        <h4 class="fw-bold mb-3 text-center">Daftar Akun Baru</h4>
+        <p class="text-muted mb-4 text-center">Isi data di bawah untuk memulai.</p>
 
         <form method="post" action="<?= BASE_URL ?>/auth/register.php">
             <div class="row g-3">
@@ -73,7 +75,7 @@ include __DIR__ . '/../includes/header.php';
                 </div>
                  <div class="col-md-6">
                     <div class="form-floating">
-                        <textarea name="alamat" class="form-control" id="regAlamat" placeholder="Alamat" style="height: 55px;"></textarea>
+                        <textarea name="alamat" class="form-control" id="regAlamat" placeholder="Alamat" style="height: 58px;"></textarea>
                         <label for="regAlamat">Alamat (Opsional)</label>
                     </div>
                 </div>
@@ -88,4 +90,5 @@ include __DIR__ . '/../includes/header.php';
         </form>
     </div>
 </div>
+
 <?php include __DIR__ . '/../includes/footer.php'; ?>
