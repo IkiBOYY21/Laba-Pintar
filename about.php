@@ -65,7 +65,7 @@ require_once 'includes/header.php';
                 
                 <div class="position-relative" style="z-index: 1;">
                     <div class="team-img-wrapper mb-3">
-                        <img src="https://ui-avatars.com/api/?name=Bagas+Permana&background=26a69a&color=fff&size=150" alt="Foto Anggota 4">
+                        <img src="Assets\img\bagas2.jpg" alt="Foto Anggota 4">
                     </div>
                     <h5 class="fw-bold mb-1">BAGAS PERMANA PUTRA</h5>
                     <span class="badge bg-info text-white mb-3">Anggota</span>

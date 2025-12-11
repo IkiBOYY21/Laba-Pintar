@@ -6,7 +6,7 @@ $is_logged = is_logged_in();
 ?>
 
 <div class="landing-wrapper">
-    <header class="landing-hero text-center">
+    <header class="landing-hero text-center" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('Assets/img/bg_home.png');">
         <div class="app-container">
             <div class="row justify-content-center">
                 <div class="col-lg-10">
